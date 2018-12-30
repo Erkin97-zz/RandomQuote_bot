@@ -33,8 +33,16 @@ func doQuote() string {
 	}
 	fmt.Printf("Your quote data %v", quoteData)
 	quoteContent := quoteData[0].(map[string]interface{})["content"].(string)
+	/*remove html tags manually*/
 	quoteContent = strings.Replace(quoteContent, "<p>", "", -1)
 	quoteContent = strings.Replace(quoteContent, "</p>", "", -1)
+	/*replace html entities some popular*/
+	quoteContent = strings.Replace(quoteContent, "&#8217;", "'", -1)
+	quoteContent = strings.Replace(quoteContent, "&#38;", "&", -1)
+	quoteContent = strings.Replace(quoteContent, "&#34;", "\"", -1)
+	quoteContent = strings.Replace(quoteContent, "&#8211;", "-", -1)
+	quoteContent = strings.Replace(quoteContent, "&#37;", "%", -1)
+	/*some editing*/
 	quoteContent = strings.TrimSuffix(quoteContent, "\n")
 	quoteContent = strings.TrimSuffix(quoteContent, " ")
 	quoteAuthor := quoteData[0].(map[string]interface{})["title"].(string)
